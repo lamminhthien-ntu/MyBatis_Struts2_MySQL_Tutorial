@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet"
+      href="css/default.min.css">
+      <script src="js/highlight.min.js"></script> 
+      <script>
+              (function() {
+          // Select node, and escape special characters
+          var el = document.querySelector('.xml'),
+              esc = _.escape(el.innerHTML);
+          
+          // Reasign escaped to node and initialize highlight.js
+          el.innerHTML = esc;
+          hljs.highlightBlock(el);
+      })();
+      </script>
+  </head>
+  <body>
+    <h1>Tải Bộ template Struts 2 Example
+   
+    </h1>
+    <p>Nguồn Apache Struts (struts.apache.org)
+      <a href="https://github.com/apache/struts-examples">Download</a>  
+    </p>
+      
+    <img src="Download Struts 2 Example Template.png" width="600px">
+    <h1>Phiên bản phần mềm đang dùng</h1>
+    <p>IDE: Eclipse IDE for Enterprise Java and Web Developers - 2021-09 </p>
+    <p>Java Development Kit: 17.0.1</p>
+    <p>Maven: 3.8.1</p>
+    <h1>Import Project Vào Eclipse</h1>
+    <h2>Bước 1:</h2> 
+    <p>File -> Open Projects from File System...</p>
+    <hr/>
+    <img src="Eclipse_file_import.png" width="700px">
+    <h2>Bước 2</h2> 
+    <p>Nhấn "Directory.." và chọn thư mục "hello-world" trong thư mục vừa giải nén, và nhấn Finish</p><hr/>
+    <img src="eclipse_import_screen.png" width="700px"> 
+    <img src="finish_import.png" width="700px"> </hr>
+    <h2>Bước 3</h2>
+    <h1>Cấu hình file pom.xml để tải các thư viện cần thiết</h1>
+    <h2>Bước 1: Sao chép đoạn code xml dưới đây và mở file <p style="color: red;">'pom.xml'</p>Dán vào vị trí như trong hình</h2>
+    <pre class="xml" style="font-family:monospace;"><span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;dependencies<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+      <span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;dependency<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+          <span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;groupId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>org.mybatis<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/groupId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+          <span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;artifactId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>mybatis<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/artifactId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+          <span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>3.3.0<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+      <span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/dependency<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+      <span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;dependency<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+          <span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;groupId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>mysql<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/groupId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+          <span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;artifactId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>mysql-connector-java<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/artifactId<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+          <span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>5.1.6<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/version<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+      <span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/dependency<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+  <span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/dependencies<span style="color: #000000; font-weight: bold;">&gt;</span></span></span></pre>
+      <img src="pom.xml.png" width="900px"> <hr/>
+      <h2>
+        Bước 2: Chạy Maven Install để cài đặt các dependencies được định nghĩa trong file <p style="color: red;">pom.xml</p>
+      </h2>
+      <img src="maven install.png" width="700px"> <hr/>
+      <h2>
+        Bước 3: Kiểm tra các phiên bản phần mềm như trong hình
+      </h2>
+      <img src="check version libraries .png" width="700px"> <hr/>
+
+      <h2>Tạo Package chứa Entity (Mô hình thực thể kết hợp, hay còn gọi là model) để tương tác với Table "Student"</h2>
+      <p>Click chuột phải vào tên Project, chọn New -> Package </p>
+      <p style="color: red; font-weight: bold;">mybatis.mapper.entity</p>
+      <img src="mybatis.mapper.entity.png" width="700px"> <hr/>
+
+      <h2>Tạo Class Student</h2>
+      <p>Click chuột phải vào tên package vừa tạo (mybatis.mapper.entity), chọn New -> Class-> Name: <p style="color: red; font-weight: bold;">Student</p> </p>
+      <img src="mybatis.mapper.entity.png" width="700px"> <hr/>
+
+      <pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">package</span> <span style="color: #006699;">mybatis.mapper.entity</span><span style="color: #339933;">;</span>
+        &nbsp;
+        <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> Student <span style="color: #009900;">&#123;</span>
+            <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000066; font-weight: bold;">int</span> id<span style="color: #339933;">;</span>
+            <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">String</span> name<span style="color: #339933;">;</span>
+            <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">String</span> branch<span style="color: #339933;">;</span>
+            <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000066; font-weight: bold;">int</span> percentage<span style="color: #339933;">;</span>
+            <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000066; font-weight: bold;">int</span> phone<span style="color: #339933;">;</span>
+            <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">String</span> email<span style="color: #339933;">;</span>
+        &nbsp;
+            <span style="color: #000000; font-weight: bold;">public</span> Student<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+            <span style="color: #009900;">&#125;</span>
+        &nbsp;
+            <span style="color: #000000; font-weight: bold;">public</span> Student<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> name, <span style="color: #003399;">String</span> branch, <span style="color: #000066; font-weight: bold;">int</span> percentage, <span style="color: #000066; font-weight: bold;">int</span> phone, <span style="color: #003399;">String</span> email<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                <span style="color: #000000; font-weight: bold;">super</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">name</span> <span style="color: #339933;">=</span> name<span style="color: #339933;">;</span>
+                <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">branch</span> <span style="color: #339933;">=</span> branch<span style="color: #339933;">;</span>
+                <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">percentage</span> <span style="color: #339933;">=</span> percentage<span style="color: #339933;">;</span>
+                <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">phone</span> <span style="color: #339933;">=</span> phone<span style="color: #339933;">;</span>
+                <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">email</span> <span style="color: #339933;">=</span> email<span style="color: #339933;">;</span>
+            <span style="color: #009900;">&#125;</span>
+        &nbsp;
+            <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">int</span> getId<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                <span style="color: #000000; font-weight: bold;">return</span> id<span style="color: #339933;">;</span>
+            <span style="color: #009900;">&#125;</span>
+        &nbsp;
+            <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> setId<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> id<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">id</span> <span style="color: #339933;">=</span> id<span style="color: #339933;">;</span>
+            <span style="color: #009900;">&#125;</span>
+        &nbsp;
+            <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">String</span> getName<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                <span style="color: #000000; font-weight: bold;">return</span> name<span style="color: #339933;">;</span>
+            <span style="color: #009900;">&#125;</span>
+        &nbsp;
+            <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> setName<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> name<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">name</span> <span style="color: #339933;">=</span> name<span style="color: #339933;">;</span>
+            <span style="color: #009900;">&#125;</span>
+        &nbsp;
+            <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">String</span> getBranch<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                <span style="color: #000000; font-weight: bold;">return</span> branch<span style="color: #339933;">;</span>
+            <span style="color: #009900;">&#125;</span>
+        &nbsp;
+            <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> setBranch<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> branch<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">branch</span> <span style="color: #339933;">=</span> branch<span style="color: #339933;">;</span>
+            <span style="color: #009900;">&#125;</span>
+        &nbsp;
+            <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">int</span> getPercentage<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                <span style="color: #000000; font-weight: bold;">return</span> percentage<span style="color: #339933;">;</span>
+            <span style="color: #009900;">&#125;</span>
+        &nbsp;
+            <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> setPercentage<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> percentage<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">percentage</span> <span style="color: #339933;">=</span> percentage<span style="color: #339933;">;</span>
+            <span style="color: #009900;">&#125;</span>
+        &nbsp;
+            <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">int</span> getPhone<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                <span style="color: #000000; font-weight: bold;">return</span> phone<span style="color: #339933;">;</span>
+            <span style="color: #009900;">&#125;</span>
+        &nbsp;
+            <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> setPhone<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> phone<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">phone</span> <span style="color: #339933;">=</span> phone<span style="color: #339933;">;</span>
+            <span style="color: #009900;">&#125;</span>
+        &nbsp;
+            <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">String</span> getEmail<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                <span style="color: #000000; font-weight: bold;">return</span> email<span style="color: #339933;">;</span>
+            <span style="color: #009900;">&#125;</span>
+        &nbsp;
+            <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> setEmail<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> email<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">email</span> <span style="color: #339933;">=</span> email<span style="color: #339933;">;</span>
+            <span style="color: #009900;">&#125;</span>
+        &nbsp;
+            @Override
+            <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">String</span> toString<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                <span style="color: #000000; font-weight: bold;">return</span> getClass<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">getName</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">+</span> <span style="color: #0000ff;">&quot;[&quot;</span> <span style="color: #339933;">+</span> <span style="color: #0000ff;">&quot;id = &quot;</span> <span style="color: #339933;">+</span> id <span style="color: #339933;">+</span> <span style="color: #0000ff;">&quot;, name = &quot;</span> <span style="color: #339933;">+</span> name <span style="color: #339933;">+</span> <span style="color: #0000ff;">&quot;, branch = &quot;</span> <span style="color: #339933;">+</span> branch 
+                        <span style="color: #339933;">+</span> <span style="color: #0000ff;">&quot;, percentage = &quot;</span> <span style="color: #339933;">+</span> percentage  <span style="color: #339933;">+</span> <span style="color: #0000ff;">&quot;, phone = &quot;</span> <span style="color: #339933;">+</span> phone  <span style="color: #339933;">+</span> <span style="color: #0000ff;">&quot;, email = &quot;</span> <span style="color: #339933;">+</span> email <span style="color: #339933;">+</span> <span style="color: #0000ff;">&quot;]&quot;</span><span style="color: #339933;">;</span> 
+            <span style="color: #009900;">&#125;</span>
+        <span style="color: #009900;">&#125;</span></pre>
+
+
+        <h2>Tạo Package chứa Interface để viết các lệnh truy vấn (Sử dụng iBatis/Mybatis anotation thực hiện truy vấn với sql)</h2>
+        <p>Tạo Package mybatis.mapper </p>
+        <p>Trong package trên, tạo Interface có tên: <p style="color: red; font-weight: bold;">StudentMapper</p></p> <hr/>
+        <pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">package</span> <span style="color: #006699;">mybatis.mapper</span><span style="color: #339933;">;</span>
+          &nbsp;
+          <span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.util.List</span><span style="color: #339933;">;</span>
+          &nbsp;
+          <span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">org.apache.ibatis.annotations.Delete</span><span style="color: #339933;">;</span>
+          <span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">org.apache.ibatis.annotations.Insert</span><span style="color: #339933;">;</span>
+          <span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">org.apache.ibatis.annotations.Options</span><span style="color: #339933;">;</span>
+          <span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">org.apache.ibatis.annotations.Result</span><span style="color: #339933;">;</span>
+          <span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">org.apache.ibatis.annotations.Results</span><span style="color: #339933;">;</span>
+          <span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">org.apache.ibatis.annotations.Select</span><span style="color: #339933;">;</span>
+          <span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">org.apache.ibatis.annotations.Update</span><span style="color: #339933;">;</span>
+          &nbsp;
+          <span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">mybatis.mapper.entity.Student</span><span style="color: #339933;">;</span>
+          &nbsp;
+          <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">interface</span> StudentMapper <span style="color: #009900;">&#123;</span>
+          &nbsp;
+              <span style="color: #666666; font-style: italic;">// get all student</span>
+              <span style="color: #000000; font-weight: bold;">final</span> <span style="color: #003399;">String</span> GET_ALL_STUDENT <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;SELECT * FROM STUDENT&quot;</span><span style="color: #339933;">;</span>
+          &nbsp;
+              @Select<span style="color: #009900;">&#40;</span>GET_ALL_STUDENT<span style="color: #009900;">&#41;</span>
+              @Results<span style="color: #009900;">&#40;</span>value <span style="color: #339933;">=</span> <span style="color: #009900;">&#123;</span> @Result<span style="color: #009900;">&#40;</span>property <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;id&quot;</span>, column <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;ID&quot;</span><span style="color: #009900;">&#41;</span>,
+                      @Result<span style="color: #009900;">&#40;</span>property <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;name&quot;</span>, column <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;NAME&quot;</span><span style="color: #009900;">&#41;</span>,
+                      @Result<span style="color: #009900;">&#40;</span>property <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;branch&quot;</span>, column <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;BRANCH&quot;</span><span style="color: #009900;">&#41;</span>,
+                      @Result<span style="color: #009900;">&#40;</span>property <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;percentage&quot;</span>, column <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;PERCENTAGE&quot;</span><span style="color: #009900;">&#41;</span>,
+                      @Result<span style="color: #009900;">&#40;</span>property <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;phone&quot;</span>, column <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;PHONE&quot;</span><span style="color: #009900;">&#41;</span>,
+                      @Result<span style="color: #009900;">&#40;</span>property <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;email&quot;</span>, column <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;EMAIL&quot;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span>
+              <span style="color: #000000; font-weight: bold;">public</span> List<span style="color: #339933;">&lt;</span>Student<span style="color: #339933;">&gt;</span> getAll<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+          &nbsp;
+              <span style="color: #666666; font-style: italic;">// get student by id</span>
+              <span style="color: #000000; font-weight: bold;">final</span> <span style="color: #003399;">String</span> GET_STUDENT_BY_ID <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;SELECT * FROM STUDENT WHERE ID = #{id}&quot;</span><span style="color: #339933;">;</span>
+          &nbsp;
+              @Select<span style="color: #009900;">&#40;</span>GET_STUDENT_BY_ID<span style="color: #009900;">&#41;</span>
+              <span style="color: #000000; font-weight: bold;">public</span> Student getById<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> id<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+          &nbsp;
+              <span style="color: #666666; font-style: italic;">// inert student</span>
+              <span style="color: #000000; font-weight: bold;">final</span> <span style="color: #003399;">String</span> INSERT_STUDENT <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;INSERT INTO STUDENT (NAME, BRANCH, PERCENTAGE, PHONE, EMAIL ) &quot;</span>
+                      <span style="color: #339933;">+</span> <span style="color: #0000ff;">&quot;VALUES (#{name}, #{branch}, #{percentage}, #{phone}, #{email})&quot;</span><span style="color: #339933;">;</span>
+          &nbsp;
+              @Update<span style="color: #009900;">&#40;</span>INSERT_STUDENT<span style="color: #009900;">&#41;</span>
+              @Options<span style="color: #009900;">&#40;</span>useGeneratedKeys <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">true</span>, keyProperty <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;id&quot;</span><span style="color: #009900;">&#41;</span>
+              <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> insert<span style="color: #009900;">&#40;</span>Student student<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+          &nbsp;
+              <span style="color: #666666; font-style: italic;">// update student</span>
+              <span style="color: #000000; font-weight: bold;">final</span> <span style="color: #003399;">String</span> UPDATE_STUDENT <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;UPDATE STUDENT SET EMAIL = #{email}, NAME = #{name}, &quot;</span>
+                      <span style="color: #339933;">+</span> <span style="color: #0000ff;">&quot;BRANCH = #{branch}, PERCENTAGE = #{percentage}, PHONE = #{phone} WHERE ID = #{id}&quot;</span><span style="color: #339933;">;</span>
+          &nbsp;
+              @Insert<span style="color: #009900;">&#40;</span>UPDATE_STUDENT<span style="color: #009900;">&#41;</span>
+              <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> update<span style="color: #009900;">&#40;</span>Student student<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+          &nbsp;
+              <span style="color: #666666; font-style: italic;">// delete student by id</span>
+              <span style="color: #000000; font-weight: bold;">final</span> <span style="color: #003399;">String</span> DELETE_STUDENT_BY_ID <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;DELETE from STUDENT WHERE ID = #{id}&quot;</span><span style="color: #339933;">;</span>
+          &nbsp;
+              @Delete<span style="color: #009900;">&#40;</span>DELETE_STUDENT_BY_ID<span style="color: #009900;">&#41;</span>
+              <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> delete<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> id<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+          <span style="color: #009900;">&#125;</span>
+          &nbsp;</pre>
+
+          <h2>Tạo file cấu hình để khởi tạo kết nối với MySQL Server và Mybatis</h2>
+          <p>Tạo file xml như trong hình  </p>
+          <p style="color: red; font-weight: bold;">SqlMapConfig.xml</p>
+          <img src="tạo file SqlMapConfig.xml.png" width="700px">
+          <pre class="java" style="font-family:monospace;"><span style="color: #339933;">&lt;?</span>xml version <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;1.0&quot;</span> encoding <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;UTF-8&quot;</span><span style="color: #339933;">?&gt;</span>
+            <span style="color: #339933;">&lt;!</span>DOCTYPE configuration <span style="color: #000000; font-weight: bold;">PUBLIC</span> <span style="color: #0000ff;">&quot;-//mybatis.org//DTD Config 3.0//EN&quot;</span> <span style="color: #0000ff;">&quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;</span><span style="color: #339933;">&gt;</span>
+            &nbsp;
+            <span style="color: #339933;">&lt;</span>configuration<span style="color: #339933;">&gt;</span>
+                <span style="color: #339933;">&lt;</span>environments <span style="color: #000000; font-weight: bold;">default</span><span style="color: #339933;">=</span><span style="color: #0000ff;">&quot;development&quot;</span><span style="color: #339933;">&gt;</span>
+                    <span style="color: #339933;">&lt;</span>environment id<span style="color: #339933;">=</span><span style="color: #0000ff;">&quot;development&quot;</span><span style="color: #339933;">&gt;</span>
+                        <span style="color: #339933;">&lt;</span>transactionManager type<span style="color: #339933;">=</span><span style="color: #0000ff;">&quot;JDBC&quot;</span> <span style="color: #339933;">/&gt;</span>
+                        <span style="color: #339933;">&lt;</span>dataSource type<span style="color: #339933;">=</span><span style="color: #0000ff;">&quot;UNPOOLED&quot;</span><span style="color: #339933;">&gt;</span>
+                            <span style="color: #339933;">&lt;</span>property name<span style="color: #339933;">=</span><span style="color: #0000ff;">&quot;driver&quot;</span> value<span style="color: #339933;">=</span><span style="color: #0000ff;">&quot;com.mysql.jdbc.Driver&quot;</span> <span style="color: #339933;">/&gt;</span>
+            &nbsp;
+                            <span style="color: #339933;">&lt;!--</span> Đặt url để kết nối đến database tên <span style="color: #0000ff;">&quot;details&quot;</span> trong localhost port <span style="color: #0000ff;">&quot;3306&quot;</span> <span style="color: #339933;">--&gt;</span>
+                            <span style="color: #339933;">&lt;!--</span> Thêm <span style="color: #0000ff;">&quot;?characterEncoding=latin1&quot;</span>  sau database có tên <span style="color: #0000ff;">&quot;details&quot;</span> để sửa lỗi <span style="color: #0000ff;">&quot;Unknown initial character set index '255' received from server&quot;</span> <span style="color: #339933;">--&gt;</span>
+                            <span style="color: #339933;">&lt;</span>property name<span style="color: #339933;">=</span><span style="color: #0000ff;">&quot;url&quot;</span> value<span style="color: #339933;">=</span><span style="color: #0000ff;">&quot;jdbc:mysql://localhost:3306/details?characterEncoding=latin1&quot;</span> <span style="color: #339933;">/&gt;</span>
+            &nbsp;
+                                <span style="color: #339933;">&lt;!--</span> Username và password phải là User Account mình vừa tạo trong MySQL Installer, chứ không phải Root Account <span style="color: #339933;">--&gt;</span>
+                            <span style="color: #339933;">&lt;</span>property name<span style="color: #339933;">=</span><span style="color: #0000ff;">&quot;username&quot;</span> value<span style="color: #339933;">=</span><span style="color: #0000ff;">&quot;lamminhthien&quot;</span> <span style="color: #339933;">/&gt;</span>
+                            <span style="color: #339933;">&lt;</span>property name<span style="color: #339933;">=</span><span style="color: #0000ff;">&quot;password&quot;</span> value<span style="color: #339933;">=</span><span style="color: #0000ff;">&quot;MinhThien2000&quot;</span> <span style="color: #339933;">/&gt;</span>
+                        <span style="color: #339933;">&lt;/</span>dataSource<span style="color: #339933;">&gt;</span>
+                    <span style="color: #339933;">&lt;/</span>environment<span style="color: #339933;">&gt;</span>
+                <span style="color: #339933;">&lt;/</span>environments<span style="color: #339933;">&gt;</span>
+            &nbsp;
+              <span style="color: #339933;">&lt;!--</span> Bảo mybatis biết <span style="color: #000000; font-weight: bold;">Interface</span> mapper chứa các lệnh truy vấn mà ta sẽ dùng nó sau này <span style="color: #339933;">--&gt;</span>
+                <span style="color: #339933;">&lt;</span>mappers<span style="color: #339933;">&gt;</span>
+                    <span style="color: #339933;">&lt;</span>mapper <span style="color: #000000; font-weight: bold;">class</span><span style="color: #339933;">=</span><span style="color: #0000ff;">&quot;mybatis.mapper.StudentMapper&quot;</span> <span style="color: #339933;">/&gt;</span>
+                <span style="color: #339933;">&lt;/</span>mappers<span style="color: #339933;">&gt;</span>
+            <span style="color: #339933;">&lt;/</span>configuration<span style="color: #339933;">&gt;</span>
+            &nbsp;</pre>
+
+            <h2>Tạo Action (Controller), tái sử dụng HelloWorldAction</h2>
+            <p style="color: red; font-weight: bold;">HelloWorldAction.java</p>
+            <p>Vị trí của file HelloWorldAction.java</p>
+            <img src="vị trí file helloworldaction.java.png" width="700px">
+            <pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">package</span> <span style="color: #006699;">org.apache.struts.helloworld.action</span><span style="color: #339933;">;</span>
+              &nbsp;
+              <span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.io.IOException</span><span style="color: #339933;">;</span>
+              <span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.io.Reader</span><span style="color: #339933;">;</span>
+              <span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.util.ArrayList</span><span style="color: #339933;">;</span>
+              <span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.util.List</span><span style="color: #339933;">;</span>
+              &nbsp;
+              <span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">org.apache.ibatis.io.Resources</span><span style="color: #339933;">;</span>
+              <span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">org.apache.ibatis.session.SqlSession</span><span style="color: #339933;">;</span>
+              <span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">org.apache.ibatis.session.SqlSessionFactory</span><span style="color: #339933;">;</span>
+              <span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">org.apache.ibatis.session.SqlSessionFactoryBuilder</span><span style="color: #339933;">;</span>
+              <span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">org.apache.struts2.dispatcher.Parameter.Request</span><span style="color: #339933;">;</span>
+              &nbsp;
+              <span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">com.opensymphony.xwork2.ActionSupport</span><span style="color: #339933;">;</span>
+              &nbsp;
+              <span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">mybatis.mapper.StudentMapper</span><span style="color: #339933;">;</span>
+              <span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">mybatis.mapper.entity.Student</span><span style="color: #339933;">;</span>
+              &nbsp;
+              <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+               * Acts as a Struts 2 controller that responds
+               * to a user action by setting the value
+               * of the Message model class, and returns a String 
+               * result.
+               * @author Bruce Phillips
+               *
+               */</span>
+              <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> HelloWorldAction <span style="color: #000000; font-weight: bold;">extends</span> ActionSupport <span style="color: #009900;">&#123;</span>
+              &nbsp;
+                  <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000000; font-weight: bold;">final</span> <span style="color: #000066; font-weight: bold;">long</span> serialVersionUID <span style="color: #339933;">=</span> 1L<span style="color: #339933;">;</span>
+                  <span style="color: #000000; font-weight: bold;">private</span> List<span style="color: #339933;">&lt;</span>Student<span style="color: #339933;">&gt;</span> listStudents<span style="color: #339933;">;</span>
+              &nbsp;
+                  <span style="color: #000000; font-weight: bold;">public</span> List<span style="color: #339933;">&lt;</span>Student<span style="color: #339933;">&gt;</span> getListStudents<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                  <span style="color: #000000; font-weight: bold;">return</span> listStudents<span style="color: #339933;">;</span>
+                <span style="color: #009900;">&#125;</span>
+              &nbsp;
+                <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> setListStudents<span style="color: #009900;">&#40;</span>List<span style="color: #339933;">&lt;</span>Student<span style="color: #339933;">&gt;</span> listStudents<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                  <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">listStudents</span> <span style="color: #339933;">=</span> listStudents<span style="color: #339933;">;</span>
+                <span style="color: #009900;">&#125;</span>
+              &nbsp;
+              &nbsp;
+                  <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">String</span> execute<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #000000; font-weight: bold;">throws</span> <span style="color: #003399;">IOException</span> <span style="color: #009900;">&#123;</span>
+              &nbsp;
+                      <span style="color: #666666; font-style: italic;">// Đọc file xml để khởi tạo kết nối đến mysql server và cấu hình interface studentmapper</span>
+                      <span style="color: #003399;">Reader</span> reader <span style="color: #339933;">=</span> Resources.<span style="color: #006633;">getResourceAsReader</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;SqlMapConfig.xml&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                      SqlSessionFactory sqlSessionFactory <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> SqlSessionFactoryBuilder<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">build</span><span style="color: #009900;">&#40;</span>reader<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                      <span style="color: #666666; font-style: italic;">// Mở Session</span>
+                      SqlSession session <span style="color: #339933;">=</span> sqlSessionFactory.<span style="color: #006633;">openSession</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+              &nbsp;
+                   <span style="color: #666666; font-style: italic;">// Tạo instance cho Interface StudentMapper (Chính là file lưu trữ các code truy vấn sql bằng mybatis annotation)</span>
+                      StudentMapper studentMapper <span style="color: #339933;">=</span> session.<span style="color: #006633;">getMapper</span><span style="color: #009900;">&#40;</span>StudentMapper.<span style="color: #000000; font-weight: bold;">class</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+              &nbsp;
+                      <span style="color: #666666; font-style: italic;">// Lấy dữ liệu toàn bộ học sinh</span>
+                      listStudents <span style="color: #339933;">=</span> studentMapper.<span style="color: #006633;">getAll</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+              &nbsp;
+                      <span style="color: #666666; font-style: italic;">//Gửi kết quả truy vấn đến view</span>
+                      setListStudents<span style="color: #009900;">&#40;</span>listStudents<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+              &nbsp;
+                      <span style="color: #666666; font-style: italic;">// ngắt kết nối </span>
+                      session.<span style="color: #006633;">close</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+              &nbsp;
+                      <span style="color: #000000; font-weight: bold;">return</span> SUCCESS<span style="color: #339933;">;</span>
+                  <span style="color: #009900;">&#125;</span>
+              <span style="color: #009900;">&#125;</span>
+              &nbsp;</pre>
+
+              <h2>Tạo JSP (View), tái sử dụng HelloWorld.jsp</h2>
+            <p style="color: red; font-weight: bold;">HelloWorld.jsp</p>
+            <p>Vị trí của file HelloWorld.jsp</p>
+            <img src="vị trí file helloworld.jsp.png" width="700px">
+            <pre class="html4strict" style="font-family:monospace;"><span style="color: #009900;">&lt;%@ taglib prefix<span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;s&quot;</span> uri<span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;/struts-tags&quot;</span> %&gt;</span>
+              <span style="color: #009900;">&lt;%@ page <span style="color: #000066;">language</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;java&quot;</span> contentType<span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;text/html; charset=UTF-8&quot;</span> pageEncoding<span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;UTF-8&quot;</span> %&gt;</span>
+              <span style="color: #00bbdd;">&lt;!DOCTYPE html&gt;</span>
+              &nbsp;
+              <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">html</span>&gt;</span>
+                <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">head</span>&gt;</span>
+                  <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">meta</span> <span style="color: #000066;">http-equiv</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;Content-Type&quot;</span> <span style="color: #000066;">content</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;text/html; charset=UTF-8&quot;</span>&gt;</span>
+                  <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">title</span>&gt;</span>Test Mybatis<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">title</span>&gt;</span>
+                <span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">head</span>&gt;</span>
+                <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">body</span>&gt;</span>
+              &nbsp;
+                  <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">h2</span>&gt;</span>Test Iterable for Database Result from Action<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">h2</span>&gt;</span>
+                  <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">table</span> <span style="color: #000066;">border</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;1&quot;</span>&gt;</span> 
+                    <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">tr</span>&gt;</span>
+                      <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">th</span>&gt;</span>ID<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">th</span>&gt;</span>
+                      <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">th</span>&gt;</span>Name<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">th</span>&gt;</span>
+                      <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">th</span>&gt;</span>Email<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">th</span>&gt;</span>
+                      <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">th</span>&gt;</span>Phone<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">th</span>&gt;</span>
+                    <span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">tr</span>&gt;</span>
+                     <span style="color: #009900;">&lt;s:iterator <span style="color: #000066;">value</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;listStudents&quot;</span> var<span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;e&quot;</span>&gt;</span>
+                       <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">tr</span>&gt;</span>
+                         <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">td</span>&gt;</span>${e.id}<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">td</span>&gt;</span>
+                         <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">td</span>&gt;</span>${e.name}<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">td</span>&gt;</span>
+                         <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">td</span>&gt;</span>${e.email}<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">td</span>&gt;</span>
+                         <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">td</span>&gt;</span>${e.phone}<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">td</span>&gt;</span>
+                        <span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">tr</span>&gt;</span>
+                    <span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span>s:iterator&gt;</span>
+                  <span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">table</span>&gt;</span>
+                <span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">body</span>&gt;</span>
+              <span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">html</span>&gt;</span>
+              &nbsp;</pre>
+
+
+              
+            
+    
+
+
+    <footer class="container">
+      <div class="col-md-12">
+        Copyright © 2000-2021 <a href="http://www.apache.org/">The Apache Software Foundation </a>.
+        All Rights Reserved.
+      </div>
+      <div class="col-md-12">
+        Apache Struts, Struts, Apache, the Apache feather logo, and the Apache Struts project logos are
+        trademarks of The Apache Software Foundation.
+      </div>
+      <div class="col-md-12">Logo and website design donated by <a href="https://softwaremill.com/">SoftwareMill</a>.</div>
+    </footer>
+  </body>
+</html>
